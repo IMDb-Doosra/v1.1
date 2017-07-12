@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%=name%> | RTM</title>
+    <script>
+        function logout() {
+            location.href = "/logout";
+        }
+    </script>
+</head>
+
+<body>
+    <div style="display:inline-flex; background:darkgrey; width:100%;">
+        <div>
+            <h1>Welcome <%=name%></h1></div>
+        <div style="float:right; color:blue;" onclick="logout()">LOGOUT</div>
+    </div>
+    <div>
+        <div><a href="/">Home</a></div>
+        <div>
+            <label for="">Ratings provided by you: </label>
+            <%for(let i=0;i<list.length;i++){%>
+                <li>
+                    <%=list[i].mname%> -->
+                        <%=list[i].rating%> stars </li>
+                <%}%>
+        </div>
+        <div>Details</div>
+    </div>
+</body>
+
+</html>

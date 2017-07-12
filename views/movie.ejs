@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%=Title%> | IMDb Doosra</title>
+    <style>
+        .center {
+            display: block;
+            margin: auto;
+        }
+        
+        #rate {
+            margin-top: 20px;
+        }
+        
+        #rating {
+            width: 100em;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script>
+        function rateMovie() {
+            var rating = document.querySelector('input[name="rating"]:checked').value;
+            var mid = "<%=imdbID%>";
+            var mname = "<%=Title%>";
+            var obj = {
+                rating: rating
+                , mid: mid
+                , mname: mname
+            }
+            console.dir(obj);
+            $.post('/rate', obj).done(function (data) {
+                console.log(data);
+                $("#rateR").empty().html(data);
+            }).fail(function (error) {
+                $("#rateR").empty().html(error);
+            });
+        }
+    </script>
+</head>
+
+<body> <a href="/">Home</a>
+    <div>
+        <h1 style="text-align:center"><%=Title%></h1>
+        <br>
+        <h3 style="text-align:center"><%=Runtime%></h3>
+        <br><img src="<%=Poster%>" class="center" alt="Poster not available">
+        <br>
+        <h3 style="text-align:center"> Rated : <%=Rated%></h3>
+        <br>
+        <h3 style="text-align:center"> Director - <%=Director%></h3>
+        <br>
+        <h4 style="text-align:center"> Actors - <%=Actors%></h4>
+        <br>
+        <h4 style="text-align:center"> Awards - <%=Awards%></h4>
+        <br>
+        <p>
+            <%=Plot%>
+        </p>
+    </div>
+    <div id="rate"> RATE THIS Movie / Series
+        <div id="rated"></div>
+        <br>
+        <div style="display:inline-flex;" class="center">
+            <input type="radio" name="rating" value="0">0
+            <input type="radio" name="rating" value="1">1
+            <input type="radio" name="rating" value="2">2
+            <input type="radio" name="rating" value="3" checked>3
+            <input type="radio" name="rating" value="4">4
+            <input type="radio" name="rating" value="5">5</div>
+        <br>
+        <button onclick="rateMovie()" class="center">Rate</button>
+    </div>
+    <div id="rateR"></div>
+    <!-- bro is div ko as a popup dikahio-->
+</body>
+
+</html>
